@@ -115,7 +115,11 @@
 - Expose snowflake credentials  for unit testing [\#2288](https://github.com/feast-dev/feast/pull/2288) ([sfc-gh-madkins](https://github.com/sfc-gh-madkins))
 - Fix flaky tests \(test\_online\_store\_cleanup & test\_feature\_get\_online\_features\_types\_match\) [\#2276](https://github.com/feast-dev/feast/pull/2276) ([pyalex](https://github.com/pyalex))
 
+<<<<<<< HEAD
 ### Merged Pull Requests
+=======
+**Merged pull requests:**
+>>>>>>> Update changelog for 0.18.1 and update pom.xml
 
 - Remove old flag warning with the python feature server [\#2300](https://github.com/feast-dev/feast/pull/2300) ([adchia](https://github.com/adchia))
 - Use an OFFLINE schema for Snowflake offline store tests [\#2291](https://github.com/feast-dev/feast/pull/2291) ([sfc-gh-madkins](https://github.com/sfc-gh-madkins))
@@ -123,7 +127,11 @@
 - Add -SNAPSHOT suffix to pom.xml version [\#2286](https://github.com/feast-dev/feast/pull/2286) ([tsotnet](https://github.com/tsotnet))
 - Update CONTRIBUTING.md [\#2282](https://github.com/feast-dev/feast/pull/2282) ([adchia](https://github.com/adchia))
 
+<<<<<<< HEAD
 # [v0.18.0](https://github.com/feast-dev/feast/tree/v0.18.0) (2022-02-05)
+=======
+## [v0.18.0](https://github.com/feast-dev/feast/tree/v0.18.0) (2022-02-05)
+>>>>>>> Update changelog for 0.18.1 and update pom.xml
 
 [Full Changelog](https://github.com/feast-dev/feast/compare/v0.17.0...v0.18.0)
 
