@@ -1,4 +1,5 @@
 import contextlib
+import os
 import uuid
 from datetime import date, datetime, timedelta
 from typing import (
@@ -42,6 +43,8 @@ from feast.repo_config import FeastConfigBaseModel, RepoConfig
 from ...saved_dataset import SavedDatasetStorage
 from ...usage import log_exceptions_and_usage
 from .bigquery_source import BigQuerySource, SavedDatasetBigQueryStorage
+from google.auth.credentials import Credentials
+from google_auth_oauthlib import flow
 
 try:
     from google.api_core.exceptions import NotFound
@@ -76,6 +79,7 @@ class BigQueryOfflineStoreConfig(FeastConfigBaseModel):
 
 
 class BigQueryOfflineStore(OfflineStore):
+
     @staticmethod
     @log_exceptions_and_usage(offline_store="bigquery")
     def pull_latest_from_table_or_query(
@@ -102,9 +106,12 @@ class BigQueryOfflineStore(OfflineStore):
         timestamp_desc_string = " DESC, ".join(timestamps) + " DESC"
         field_string = ", ".join(join_key_columns + feature_name_columns + timestamps)
 
+        credentials = _get_appflow()
+
         client = _get_bigquery_client(
             project=config.offline_store.project_id,
             location=config.offline_store.location,
+            credentials=credentials,
         )
         query = f"""
             SELECT
@@ -138,9 +145,12 @@ class BigQueryOfflineStore(OfflineStore):
         assert isinstance(data_source, BigQuerySource)
         from_expression = data_source.get_table_query_string()
 
+        credentials = _get_appflow()
+
         client = _get_bigquery_client(
             project=config.offline_store.project_id,
             location=config.offline_store.location,
+            credentials=credentials
         )
         field_string = ", ".join(
             join_key_columns + feature_name_columns + [event_timestamp_column]
@@ -168,9 +178,12 @@ class BigQueryOfflineStore(OfflineStore):
         # TODO: Add entity_df validation in order to fail before interacting with BigQuery
         assert isinstance(config.offline_store, BigQueryOfflineStoreConfig)
 
+        credentials = _get_appflow()
+
         client = _get_bigquery_client(
             project=config.offline_store.project_id,
             location=config.offline_store.location,
+            credentials=credentials
         )
 
         assert isinstance(config.offline_store, BigQueryOfflineStoreConfig)
@@ -366,6 +379,16 @@ class BigQueryRetrievalJob(RetrievalJob):
     def metadata(self) -> Optional[RetrievalMetadata]:
         return self._metadata
 
+def _get_appflow(file_path: str="client_secret.json", scopes: List[str]=["https://www.googleapis.com/auth/bigquery"]) -> Credentials:
+    """
+    Get the Google AppFlow for BigQuery offline store.
+    This method is a no-op if ELEMENO_MODE is not production, in this case authentication happens through service account.
+    """
+    if not os.environ['ELEMENO_MODE'] == 'production':
+        appflow = flow.InstalledAppFlow.from_client_secrets_file(client_secrets_file=file_path, scopes=scopes)
+        appflow.run_console()
+        return appflow.credentials
+
 
 def block_until_done(
     client: Client,
@@ -511,9 +534,9 @@ def _get_entity_df_event_timestamp_range(
     return entity_df_event_timestamp_range
 
 
-def _get_bigquery_client(project: Optional[str] = None, location: Optional[str] = None):
+def _get_bigquery_client(project: Optional[str] = None, location: Optional[str] = None, credentials: Optional[Credentials] = None) -> Client:
     try:
-        client = bigquery.Client(project=project, location=location)
+        client = bigquery.Client(project=project, location=location, credentials=credentials)
     except DefaultCredentialsError as e:
         raise FeastProviderLoginError(
             str(e)
