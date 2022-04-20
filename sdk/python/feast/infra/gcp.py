@@ -9,6 +9,7 @@ from feast.protos.feast.core.Registry_pb2 import Registry as RegistryProto
 from feast.registry_store import RegistryStore
 from feast.repo_config import RegistryConfig
 from feast.usage import log_exceptions_and_usage
+from feast.infra.offline_stores import bigquery
 
 
 class GcpProvider(PassthroughProvider):
@@ -29,7 +30,8 @@ class GCSRegistryStore(RegistryStore):
 
             raise FeastExtrasDependencyImportError("gcp", str(e))
 
-        self.gcs_client = storage.Client()
+        credentials = bigquery.get_appflow()
+        self.gcs_client = storage.Client(credentials=credentials)
         self._uri = urlparse(uri)
         self._bucket = self._uri.hostname
         self._blob = self._uri.path.lstrip("/")
