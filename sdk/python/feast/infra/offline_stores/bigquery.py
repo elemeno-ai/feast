@@ -36,6 +36,7 @@ from feast.infra.offline_stores.offline_store import (
     RetrievalJob,
     RetrievalMetadata,
 )
+from feast.infra.utils.gcp_utils import get_appflow
 from feast.on_demand_feature_view import OnDemandFeatureView
 from feast.registry import Registry
 from feast.repo_config import FeastConfigBaseModel, RepoConfig
@@ -44,7 +45,6 @@ from ...saved_dataset import SavedDatasetStorage
 from ...usage import log_exceptions_and_usage
 from .bigquery_source import BigQuerySource, SavedDatasetBigQueryStorage
 from google.auth.credentials import Credentials
-from google_auth_oauthlib import flow
 
 try:
     from google.api_core.exceptions import NotFound
@@ -106,7 +106,7 @@ class BigQueryOfflineStore(OfflineStore):
         timestamp_desc_string = " DESC, ".join(timestamps) + " DESC"
         field_string = ", ".join(join_key_columns + feature_name_columns + timestamps)
 
-        credentials = _get_appflow()
+        credentials = get_appflow()
 
         client = _get_bigquery_client(
             project=config.offline_store.project_id,
@@ -145,7 +145,7 @@ class BigQueryOfflineStore(OfflineStore):
         assert isinstance(data_source, BigQuerySource)
         from_expression = data_source.get_table_query_string()
 
-        credentials = _get_appflow()
+        credentials = get_appflow()
 
         client = _get_bigquery_client(
             project=config.offline_store.project_id,
@@ -178,7 +178,7 @@ class BigQueryOfflineStore(OfflineStore):
         # TODO: Add entity_df validation in order to fail before interacting with BigQuery
         assert isinstance(config.offline_store, BigQueryOfflineStoreConfig)
 
-        credentials = _get_appflow()
+        credentials = get_appflow()
 
         client = _get_bigquery_client(
             project=config.offline_store.project_id,
@@ -378,16 +378,6 @@ class BigQueryRetrievalJob(RetrievalJob):
     @property
     def metadata(self) -> Optional[RetrievalMetadata]:
         return self._metadata
-
-def _get_appflow(file_path: str="client_secret.json", scopes: List[str]=["https://www.googleapis.com/auth/bigquery"]) -> Credentials:
-    """
-    Get the Google AppFlow for BigQuery offline store.
-    This method is a no-op if ELEMENO_MODE is not production, in this case authentication happens through service account.
-    """
-    if not os.environ['ELEMENO_MODE'] == 'production':
-        appflow = flow.InstalledAppFlow.from_client_secrets_file(client_secrets_file=file_path, scopes=scopes)
-        appflow.run_console()
-        return appflow.credentials
 
 
 def block_until_done(

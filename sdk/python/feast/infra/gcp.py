@@ -5,6 +5,7 @@ from tempfile import TemporaryFile
 from urllib.parse import urlparse
 
 from feast.infra.passthrough_provider import PassthroughProvider
+from feast.infra.utils.gcp_utils import get_appflow
 from feast.protos.feast.core.Registry_pb2 import Registry as RegistryProto
 from feast.registry_store import RegistryStore
 from feast.repo_config import RegistryConfig
@@ -28,8 +29,9 @@ class GCSRegistryStore(RegistryStore):
             from feast.errors import FeastExtrasDependencyImportError
 
             raise FeastExtrasDependencyImportError("gcp", str(e))
-
-        self.gcs_client = storage.Client()
+        
+        credentials = get_appflow()
+        self.gcs_client = storage.Client(credentials=credentials)
         self._uri = urlparse(uri)
         self._bucket = self._uri.hostname
         self._blob = self._uri.path.lstrip("/")
