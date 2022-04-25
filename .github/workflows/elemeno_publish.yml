@@ -1,0 +1,37 @@
+name: Tag release
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  publish:
+    if: ${{ !contains(github.ref_name, '-') }}
+    environment: PROD_BUILD
+    runs-on: ubuntu-latest
+    name: Python 3.8
+    steps:
+      - uses: actions/checkout@v3
+      #TODO add a step for running unit tests
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Build go and bump version
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18.1
+      - name: Build python and bump version
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+          architecture: x64
+      - name: Install pip-tools
+        run: pip install pip-tools
+      - name: Run ci dependencies 
+        run: make install python-ci-dependencies
+        env:
+          PYTHON: 3.8
+      - name: Publish to pypi
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        run: make pip-pypi
