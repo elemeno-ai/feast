@@ -32,8 +32,6 @@ jobs:
           PYTHON: 3.8
       - name: Install twine
         run: pip install twine
-        env:
-          PYTHON: 3.8
       - name: Publish to pypi
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}

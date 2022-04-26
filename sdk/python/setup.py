@@ -39,10 +39,10 @@ except ImportError:
     from distutils.command.build_ext import build_ext as _build_ext
     from distutils.core import setup
 
-NAME = "feast"
-DESCRIPTION = "Python SDK for Feast"
-URL = "https://github.com/feast-dev/feast"
-AUTHOR = "Feast"
+NAME = "elemeno-feast"
+DESCRIPTION = "Python SDK for Elemeno's Feast"
+URL = "https://github.com/elemeno-ai/feast"
+AUTHOR = "Elemeno AI"
 REQUIRES_PYTHON = ">=3.7.0"
 
 REQUIRED = [
