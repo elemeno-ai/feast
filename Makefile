@@ -251,7 +251,9 @@ build-templates:
 clean:
 	rm -rf dist
 
-_pip-pypi: clean
+_pip-pypi: 
+	cd sdk/python 
+	clean
 	python setup.py sdist bdist_wheel
 	twine upload --non-interactive dist/*.whl
 
