@@ -1,4 +1,4 @@
-name: Tag release
+name: Elemeno's Feast Tag release
 on:
   push:
     tags:
@@ -27,7 +27,7 @@ jobs:
       - name: Install pip-tools
         run: pip install pip-tools
       - name: Install dependencies 
-        run: make install python-ci-dependencies
+        run: make install-python-ci-dependencies
         env:
           PYTHON: 3.8
       - name: Publish to pypi
