@@ -244,3 +244,16 @@ build-sphinx: compile-protos-python
 
 build-templates:
 	python infra/scripts/compile-templates.py
+
+
+# Elemeno's Publish 
+
+clean:
+	rm -rf dist
+
+_pip-pypi: clean
+	python setup.py sdist bdist_wheel
+	twine upload --non-interactive dist/*.whl
+
+pip-pypi: clean _pip-pypi
+
