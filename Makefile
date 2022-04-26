@@ -249,13 +249,11 @@ build-templates:
 # Elemeno's Publish 
 
 clean:
-	rm -rf dist
+	cd sdk/python; rm -rf dist
 
 _pip-pypi: 
-	cd sdk/python 
-	clean
-	python setup.py sdist bdist_wheel
-	twine upload --non-interactive dist/*.whl
+	cd sdk/python; python setup.py sdist bdist_wheel
+	cd sdk/python; twine upload --non-interactive dist/*.whl
 
 pip-pypi: clean _pip-pypi
 
