@@ -26,8 +26,12 @@ jobs:
           architecture: x64
       - name: Install pip-tools
         run: pip install pip-tools
-      - name: Install dependencies 
+      - name: Install ci dependencies 
         run: make install-python-ci-dependencies
+        env:
+          PYTHON: 3.8
+      - name: Install twine
+        run: pip install twine
         env:
           PYTHON: 3.8
       - name: Publish to pypi
