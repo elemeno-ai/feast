@@ -17,6 +17,7 @@ import numpy as np
 import pandas as pd
 import pyarrow
 import pyarrow.parquet
+from google.auth.credentials import Credentials
 from pydantic import StrictStr
 from pydantic.typing import Literal
 from tenacity import Retrying, retry_if_exception_type, stop_after_delay, wait_fixed
@@ -44,7 +45,6 @@ from feast.repo_config import FeastConfigBaseModel, RepoConfig
 from ...saved_dataset import SavedDatasetStorage
 from ...usage import log_exceptions_and_usage
 from .bigquery_source import BigQuerySource, SavedDatasetBigQueryStorage
-from google.auth.credentials import Credentials
 
 try:
     from google.api_core.exceptions import NotFound
