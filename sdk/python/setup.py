@@ -459,7 +459,7 @@ setup(
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
         "Operating System :: Unix",
         "Operating System :: POSIX",
-        "License :: OSI Approved :: Apache Software License",
+        'Operating System :: Microsoft :: Windows',
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
