@@ -752,3 +752,5 @@ zipp==3.8.0
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools
+twine==4.0.0
+auditwheel==5.1.2

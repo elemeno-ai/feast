@@ -30,8 +30,6 @@ jobs:
         run: make install-python-ci-dependencies
         env:
           PYTHON: 3.8
-      - name: Install twine
-        run: pip install twine
       - name: Publish to pypi
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}

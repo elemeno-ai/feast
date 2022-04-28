@@ -253,7 +253,7 @@ clean:
 
 _pip-pypi: 
 	cd sdk/python; python setup.py sdist bdist_wheel
-	cd sdk/python; twine upload --non-interactive dist/*.whl
+	cd sdk/python; twine upload dist/*.whl
 
 pip-pypi: clean _pip-pypi
 
