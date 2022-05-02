@@ -156,9 +156,15 @@ The list below contains the functionality that contributors are planning to deve
   * [x] [BigQuery](https://docs.feast.dev/reference/offline-stores/bigquery)
   * [x] [Synapse (community plugin)](https://github.com/Azure/feast-azure)
   * [x] [Hive (community plugin)](https://github.com/baineng/feast-hive)
+<<<<<<< HEAD
   * [x] [Postgres (contrib plugin)](https://docs.feast.dev/reference/offline-stores/postgres)
   * [x] [Trino (contrib plugin)](https://github.com/Shopify/feast-trino)
   * [x] [Spark (contrib plugin)](https://docs.feast.dev/reference/offline-stores/spark)
+=======
+  * [x] [Postgres (community plugin)](https://github.com/nossrannug/feast-postgres)
+  * [x] [Trino (community plugin)](https://github.com/Shopify/feast-trino)
+  * [x] [Spark (community plugin)](https://github.com/Adyen/feast-spark-offline-store)
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
   * [x] [In-memory / Pandas](https://docs.feast.dev/reference/offline-stores/file)
   * [x] [Custom offline store support](https://docs.feast.dev/how-to-guides/adding-a-new-offline-store)
 * **Online Stores**

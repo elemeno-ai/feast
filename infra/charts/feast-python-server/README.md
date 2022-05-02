@@ -1,6 +1,10 @@
 # feast-python-server
 
+<<<<<<< HEAD
 ![Version: 0.20.0](https://img.shields.io/badge/Version-0.20.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+=======
+![Version: 0.18.1](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
 
 Feast Feature Server in Python
 

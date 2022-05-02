@@ -1,6 +1,10 @@
 # feature-server
 
+<<<<<<< HEAD
 ![Version: 0.20.0](https://img.shields.io/badge/Version-0.20.0-informational?style=flat-square) ![AppVersion: v0.20.0](https://img.shields.io/badge/AppVersion-v0.20.0-informational?style=flat-square)
+=======
+![Version: 0.18.1](https://img.shields.io/badge/Version-0.18.1-informational?style=flat-square) ![AppVersion: v0.18.1](https://img.shields.io/badge/AppVersion-v0.18.1-informational?style=flat-square)
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
 
 Feast Feature Server: Online feature serving service for Feast
 
@@ -17,7 +21,11 @@ Feast Feature Server: Online feature serving service for Feast
 | envOverrides | object | `{}`                                                  | Extra environment variables to set |
 | image.pullPolicy | string | `"IfNotPresent"`                                      | Image pull policy |
 | image.repository | string | `"feastdev/feature-server-java"`                      | Docker image for Feature Server repository |
+<<<<<<< HEAD
 | image.tag | string | `"0.20.0"`                                            | Image tag |
+=======
+| image.tag | string | `"0.18.1"`                                            | Image tag |
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
 | ingress.grpc.annotations | object | `{}`                                                  | Extra annotations for the ingress |
 | ingress.grpc.auth.enabled | bool | `false`                                               | Flag to enable auth |
 | ingress.grpc.class | string | `"nginx"`                                             | Which ingress controller to use |

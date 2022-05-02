@@ -29,7 +29,7 @@ class GCSRegistryStore(RegistryStore):
             from feast.errors import FeastExtrasDependencyImportError
 
             raise FeastExtrasDependencyImportError("gcp", str(e))
-
+        
         credentials = get_appflow()
         self.gcs_client = storage.Client(credentials=credentials)
         self._uri = urlparse(uri)

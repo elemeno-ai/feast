@@ -1,12 +1,20 @@
 dependencies:
 - name: feature-server
   alias: feature-server
+<<<<<<< HEAD
   version: 0.20.0
+=======
+  version: 0.18.1
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
   condition: feature-server.enabled
   repository: https://feast-helm-charts.storage.googleapis.com
 - name: transformation-service
   alias: transformation-service
+<<<<<<< HEAD
   version: 0.20.0
+=======
+  version: 0.18.1
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
   condition: transformation-service.enabled
   repository: https://feast-helm-charts.storage.googleapis.com
 - name: redis

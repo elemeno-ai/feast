@@ -38,7 +38,11 @@
     </modules>
 
     <properties>
+<<<<<<< HEAD
         <revision>0.20.0</revision>
+=======
+        <revision>0.18.1</revision>
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
         <github.url>https://github.com/feast-dev/feast</github.url>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

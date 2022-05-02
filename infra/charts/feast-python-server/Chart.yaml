@@ -2,7 +2,11 @@ apiVersion: v2
 name: feast-python-server
 description: Feast Feature Server in Python
 type: application
+<<<<<<< HEAD
 version: 0.20.0
+=======
+version: 0.18.1
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
 keywords:
   - machine learning
   - big data

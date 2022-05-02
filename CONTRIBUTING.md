@@ -37,6 +37,20 @@ A quick list of things to keep in mind as you're making changes:
   - Please run tests locally before submitting a PR (e.g. for Python, the [local integration tests](#local-integration-tests))
   - Try to keep PRs smaller. This makes them easier to review.
 
+### Pull request checklist
+A quick list of things to keep in mind as you're making changes:
+- As you make changes
+  - Make your changes in a [forked repo](#forking-the-repo) (instead of making a branch on the main Feast repo)
+  - [Sign your commits](#signing-off-commits) as you go (to avoid DCO checks failing)
+  - [Rebase from master](#incorporating-upstream-changes-from-master) instead of using `git pull` on your PR branch
+  - Install [pre-commit hooks](#pre-commit-hooks) to ensure all the default linters / formatters are run when you push.
+- When you make the PR
+  - Make a pull request from the forked repo you made
+  - Ensure you add a GitHub **label** (i.e. a kind tag to the PR (e.g. `kind/bug` or `kind/housekeeping`)) or else checks will fail.
+  - Ensure you leave a release note for any user facing changes in the PR. There is a field automatically generated in the PR request. You can write `NONE` in that field if there are no user facing changes. 
+  - Please run tests locally before submitting a PR (e.g. for Python, the [local integration tests](#local-integration-tests))
+  - Try to keep PRs smaller. This makes them easier to review.
+
 ### Forking the repo
 Fork the Feast Github repo and clone your fork locally. Then make changes to a local branch to the fork.
 
@@ -53,10 +67,10 @@ pre-commit install --hook-type pre-commit --hook-type pre-push
 3. On push, the pre-commit hook will run. This runs `make format` and `make lint`.
 
 ### Signing off commits
-> :warning: Warning: using the default integrations with IDEs like VSCode or IntelliJ will not sign commits.
+> :warning: Warning: using the default integrations with IDEs like VSCode or IntelliJ will not sign commits. 
 > When you submit a PR, you'll have to re-sign commits to pass the DCO check.
 
-Use git signoffs to sign your commits. See
+Use git signoffs to sign your commits. See 
 https://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification for details
 
 Then, you can sign off commits with the `-s` flag:
@@ -139,10 +153,12 @@ Redis
 
 Now run `make test-python-universal-local`
 
+Now run `make test-python-universal-local`
+
 #### Full integration tests
 To test across clouds, on top of setting up Redis, you also need GCP / AWS / Snowflake setup.
 
-> Note: you can manually control what tests are run today by inspecting
+> Note: you can manually control what tests are run today by inspecting 
 > [RepoConfiguration](https://github.com/feast-dev/feast/blob/master/sdk/python/tests/integration/feature_repos/repo_configuration.py)
 > and commenting out tests that are added to `DEFAULT_FULL_REPO_CONFIGS`
 
@@ -163,24 +179,6 @@ To test across clouds, on top of setting up Redis, you also need GCP / AWS / Sno
 - See https://signup.snowflake.com/
 
 Then run `make test-python-integration`. Note that for Snowflake / GCP / AWS, this will create new temporary tables / datasets.
-
-#### (Experimental) Run full integration tests against containerized services
-Test across clouds requires existing accounts on GCP / AWS / Snowflake, and may incur costs when using these services.
-
-For this approach of running tests, you'll need to have docker set up locally: [Get Docker](https://docs.docker.com/get-docker/)
-
-It's possible to run some integration tests against emulated local versions of these services, using ephemeral containers. 
-These tests create new temporary tables / datasets locally only, and they are cleaned up. when the containers are torn down.
-
-The services with containerized replacements currently implemented are:
-- Datastore
-- DynamoDB
-- Redis
-- Trino
-- HBase
-
-You can run `make test-python-integration-container` to run tests against the containerized versions of dependencies.
-
 
 ## Feast Java Serving
 See [Java contributing guide](java/CONTRIBUTING.md)

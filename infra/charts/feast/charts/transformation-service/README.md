@@ -1,6 +1,10 @@
 # transformation-service
 
+<<<<<<< HEAD
 ![Version: 0.20.0](https://img.shields.io/badge/Version-0.20.0-informational?style=flat-square) ![AppVersion: v0.20.0](https://img.shields.io/badge/AppVersion-v0.20.0-informational?style=flat-square)
+=======
+![Version: 0.18.1](https://img.shields.io/badge/Version-0.18.1-informational?style=flat-square) ![AppVersion: v0.18.1](https://img.shields.io/badge/AppVersion-v0.18.1-informational?style=flat-square)
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
 
 Transformation service: to compute on-demand features
 
@@ -13,7 +17,11 @@ Transformation service: to compute on-demand features
 | envOverrides | object | `{}`                                       | Extra environment variables to set |
 | image.pullPolicy | string | `"IfNotPresent"`                           | Image pull policy |
 | image.repository | string | `"feastdev/feature-transformation-server"` | Docker image for Transformation Server repository |
+<<<<<<< HEAD
 | image.tag | string | `"0.20.0"`                                 | Image tag |
+=======
+| image.tag | string | `"0.18.1"`                                 | Image tag |
+>>>>>>> 33429a1f0c314c29901b17c9b9e2032b4163c4c9
 | nodeSelector | object | `{}`                                       | Node labels for pod assignment |
 | podLabels | object | `{}`                                       | Labels to be added to Feast Serving pods |
 | replicaCount | int | `1`                                        | Number of pods that will be created |
