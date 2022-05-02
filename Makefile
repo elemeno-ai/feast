@@ -255,5 +255,8 @@ _pip-pypi:
 	cd sdk/python; python setup.py sdist bdist_wheel
 	cd sdk/python; twine upload dist/*.whl
 
-pip-pypi: clean _pip-pypi
+_upload:
+	cd sdk/python; twine upload dist/*.whl
+
+upload: clean upload
 
