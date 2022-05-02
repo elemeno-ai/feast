@@ -41,7 +41,7 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
-        run: make upload
+        run: twine upload dist/*
 
   build:
     name: Build wheels
