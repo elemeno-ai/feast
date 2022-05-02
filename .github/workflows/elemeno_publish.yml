@@ -8,6 +8,7 @@ jobs:
     if: ${{ !contains(github.ref_name, '-') }}
     environment: PROD_BUILD
     runs-on: ubuntu-latest
+    needs: [build]
     name: Python 3.8
     steps:
       - uses: actions/checkout@v3
@@ -30,8 +31,41 @@ jobs:
         run: make install-python-ci-dependencies
         env:
           PYTHON: 3.8
+      - uses: actions/download-artifact@v2
+        with:
+          name: wheels
+          path: dist
       - name: Publish to pypi
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
-        run: make pip-pypi
+        run: make upload
+
+  build:
+    name: Build wheels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.4.0
+        with:
+          package-dir: sdk/python
+        env:
+          CIBW_BUILD: "cp3*_x86_64"
+          CIBW_SKIP: "cp36-* *-musllinux_x86_64 cp310-macosx_x86_64"
+          CIBW_ARCHS: "native"
+          CIBW_ENVIRONMENT: >
+            COMPILE_GO=True
+          CIBW_BEFORE_ALL_LINUX: |
+            yum install -y golang
+          CIBW_BEFORE_ALL_MACOS: |
+            curl -o python.pkg https://www.python.org/ftp/python/3.9.12/python-3.9.12-macosx10.9.pkg
+            sudo installer -pkg python.pkg -target /
+          CIBW_BEFORE_BUILD: |
+            make install-protoc-dependencies
+            make install-go-proto-dependencies
+            make install-go-ci-dependencies
+      - uses: actions/upload-artifact@v2
+        with:
+          name: wheels
+          path: ./wheelhouse/*.whl
