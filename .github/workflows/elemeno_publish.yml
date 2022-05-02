@@ -20,17 +20,19 @@ jobs:
       #   uses: actions/setup-go@v3
       #   with:
       #     go-version: 1.18.1
-      # - name: Build python and bump version
-      #   uses: actions/setup-python@v3
-      #   with:
-      #     python-version: 3.8
-      #     architecture: x64
+      - name: Build python and bump version
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+          architecture: x64
       # - name: Install pip-tools
       #   run: pip install pip-tools
       # - name: Install ci dependencies 
       #   run: make install-python-ci-dependencies
       #   env:
       #     PYTHON: 3.8
+      - name: Install Twine
+        run: pip install twine
       - uses: actions/download-artifact@v2
         with:
           name: wheels
