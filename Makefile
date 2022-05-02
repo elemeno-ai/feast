@@ -258,5 +258,5 @@ _pip-pypi:
 _upload:
 	cd sdk/python; twine upload dist/*.whl
 
-upload: clean upload
+upload: clean _upload
 
