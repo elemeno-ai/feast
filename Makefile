@@ -256,5 +256,5 @@ _pip-pypi:
 	cd sdk/python; twine upload dist/*.whl
 
 upload:
-	cd sdk/python; twine upload dist/*
+	cd sdk/python; twine upload dist/wheelhouse/*.whl
 
